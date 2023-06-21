@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void interpretSnippet(const char* snippet) {
+    // Split the snippet into two numbers
+    char* token = strtok((char*)snippet, " ");
+    int num1 = atoi(token);
+    
+    token = strtok(NULL, " ");
+    int num2 = atoi(token);
+    
+    // Add the numbers
+    int sum = num1 + num2;
+    
+    // Print the result
+    printf("Sum of %d and %d is %d\n", num1, num2, sum);
+}
+
+int main() {
+    char snippet[100];
+    
+    while (1) {
+        printf("Enter a snippet of code (or 'exit' to quit): ");
+        fgets(snippet, sizeof(snippet), stdin);
+        snippet[strcspn(snippet, "\n")] = '\0';  // Remove trailing newline
+        
+        if (strcmp(snippet, "exit") == 0) {
+            break;  // Exit the infinite loop if the user enters 'exit'
+        }
+        
+        interpretSnippet(snippet);
+    }
+    
+    return 0;
+}
